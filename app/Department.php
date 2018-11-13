@@ -13,6 +13,20 @@ class Department extends Model
         'name'
     ];
 
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name']=mb_strtolower($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return mb_strtoupper($value);
+
+    }
+
+    /**Relaciones**/
+
     public function area(){
         return $this->belongsTo('App\Area');
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,38 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    public function setPasswordAttribute($value)
+    {
+        if ( ! empty ($value))
+        {
+            $this->attributes['password'] = Hash::make($value);
+        }
+    }
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email']=strtolower($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name']=strtolower($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+
+    }
+
+
+
+    /*** Relaciones***/
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function worker(){
         return $this->hasOne('App\Worker');
     }
