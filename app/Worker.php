@@ -85,15 +85,14 @@ class Worker extends Model
 
     public function setTreatmentAttribute($value)
     {
-        $this->attributes['treatment']=mb_strtolower($value);
+        $this->attributes['treatment']=strtolower($value);
     }
 
     public function getTreatmentAttribute($value)
     {
-        return mb_strtoupper($value);
+        return ucfirst($value.'.');
 
     }
-
 
 
     /**Relaciones**/

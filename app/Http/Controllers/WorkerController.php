@@ -7,7 +7,7 @@ use App\User;
 use App\Worker;
 use Illuminate\Http\Request;
 
-class WorkerController extends Controller
+class WorkerController extends ApiController
 {
     /**
      * Display a listing of the resource.

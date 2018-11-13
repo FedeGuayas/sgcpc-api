@@ -6,7 +6,7 @@ use App\Area;
 use App\Department;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class DepartmentController extends ApiController
 {
     /**
      * Display a listing of the resource.

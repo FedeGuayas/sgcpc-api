@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use Illuminate\Http\Request;
 
-class AreaController extends Controller
+class AreaController extends ApiController
 {
     /**
      * Display a listing of the resource.
