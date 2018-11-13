@@ -10,23 +10,19 @@ use Illuminate\Http\Request;
 class WorkerController extends ApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $trabajadores=Worker::all();
 
-        return response()->json(['data'=>$trabajadores],200);
+        return $this->showAll($trabajadores);
     }
 
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -56,27 +52,23 @@ class WorkerController extends ApiController
         $trabajador->treatment=$request->treatment;
         $trabajador->save();
 
-        return response()->json(['data'=>$trabajador],201);
+        return $this->showOne($trabajador,201);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Worker  $worker
-     * @return \Illuminate\Http\Response
+     * @param Worker $worker
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Worker $worker)
     {
-        return response()->json(['data'=>$worker],200);
+        return $this->showOne($worker);
     }
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Worker  $worker
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Worker $worker
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Worker $worker)
     {
@@ -130,24 +122,22 @@ class WorkerController extends ApiController
         }
 
         if (!$worker->isDirty()){
-            return response()->json(['error'=>'Se debe especificar algun valor para actualizar','code'=>422],422);
+            return $this->errorResponse('Se debe especificar algun valor para actualizar',422);
         }
 
         $worker->save();
 
-        return response()->json(['data'=>$worker],200);
+        return $this->showOne($worker);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Worker  $worker
-     * @return \Illuminate\Http\Response
+     * @param Worker $worker
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Worker $worker)
     {
         $worker->delete();
 
-        return response()->json(['data'=>$worker],200);
+        return $this->showOne($worker);
     }
 }

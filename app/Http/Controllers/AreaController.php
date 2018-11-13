@@ -8,23 +8,20 @@ use Illuminate\Http\Request;
 class AreaController extends ApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $areas=Area::all();
 
-        return response()->json(['data'=>$areas],200);
+        return $this->showAll($areas);
+//        return response()->json(['data'=>$areas],200);
     }
 
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -40,27 +37,23 @@ class AreaController extends ApiController
 
         $area=Area::create($campos);
 
-        return response()->json(['data'=>$area],201);
+        return $this->showOne($area,201);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Area  $area
-     * @return \Illuminate\Http\Response
+     * @param Area $area
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Area $area)
     {
-        return response()->json(['data'=>$area],200);
+        return $this->showOne($area);
     }
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Area  $area
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Area $area
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Area $area)
     {
@@ -85,25 +78,24 @@ class AreaController extends ApiController
         }
 
         if (!$area->isDirty()){
-            return response()->json(['error'=>'Se debe especificar algun valor para actualizar','code'=>422],422);
+            return $this->errorResponse('Se debe especificar algun valor para actualizar',422);
+//            return response()->json(['error'=>'Se debe especificar algun valor para actualizar','code'=>422],422);
         }
 
         $area->save();
 
-        return response()->json(['data'=>$area],200);
+        return $this->showOne($area);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Area  $area
-     * @return \Illuminate\Http\Response
+     * @param Area $area
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Area $area)
     {
         $area->delete();
 
-        return response()->json(['data'=>$area],200);
+        return $this->showOne($area);
     }
 
 }

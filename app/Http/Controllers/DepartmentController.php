@@ -9,22 +9,18 @@ use Illuminate\Http\Request;
 class DepartmentController extends ApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $departamentos=Department::with('area')->get();
 
-        return response()->json(['data'=>$departamentos],200);
+        return $this->showAll($departamentos);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -42,27 +38,23 @@ class DepartmentController extends ApiController
         $departamento->name=$request->name;
         $departamento->save();
 
-        return response()->json(['data'=>$departamento],201);
+       return $this->showOne($departamento,201);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Department $department)
     {
-        return response()->json(['data'=>$department],200);
+        return $this->showOne($department);
     }
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Department $department
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Department $department)
     {
@@ -83,24 +75,22 @@ class DepartmentController extends ApiController
         }
 
         if (!$department->isDirty()){
-            return response()->json(['error'=>'Se debe especificar algun valor para actualizar','code'=>422],422);
+            return $this->errorResponse('Se debe especificar algun valor para actualizar',422);
         }
 
         $department->save();
 
-        return response()->json(['data'=>$department],200);
+        return $this->showOne($department);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Department $department)
     {
         $department->delete();
 
-        return response()->json(['data'=>$department],200);
+        return $this->showOne($department);
     }
 }
