@@ -2,12 +2,21 @@
 
 namespace App;
 
+use App\Scopes\UserScope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
+
+    //Este Scope global hace que las consultas de user solo me devuelvan los que son trabajadores
+    protected static function boot(){
+        parent::boot(); //necesario para mantener el correcto funcionamiento del framework
+        static::addGlobalScope(new UserScope());
+    }
+
+
     use Notifiable;
 
     /**
