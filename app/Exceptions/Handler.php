@@ -93,6 +93,15 @@ class Handler extends ExceptionHandler
                 return $this->errorResponse("No se puede eliminar el recurso porque está relacionado con otro.",409);
             }
         }
+        /***Excepcion al tratar de insertar duplicados en campos unicos, error 1062***/
+        if ($exception instanceof QueryException) {
+            $codigo=$exception->errorInfo[1];
+            if ($codigo==1062){
+                return $this->errorResponse('No se puede entrar información duplicada',500);
+            }
+        }
+
+
 
 
         /**Si se esta en desarrollo mostrar la mayor cantidad de informacion posible de los errores,  **/

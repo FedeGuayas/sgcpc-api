@@ -25,6 +25,7 @@ class CreateWorkersTable extends Migration
             $table->string('position')->nullable();
             $table->string('treatment')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('restrict');

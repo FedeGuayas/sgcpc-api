@@ -3,13 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Area extends Model
 {
+    use SoftDeletes;
+
     const AREA_HABILITADA = 'h';
     const AREA_NO_HABILITADA = 'd';
 
     public $timestamps = false;
+
+    protected $dates=['deleted_at'];
 
     protected $fillable = [
         'name',

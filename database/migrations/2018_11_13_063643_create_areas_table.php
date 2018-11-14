@@ -18,6 +18,7 @@ class CreateAreasTable extends Migration
             $table->string('name',100)->unique();
             $table->string('code',5);
             $table->string('status')->default(\App\Area::AREA_HABILITADA);
+            $table->softDeletes();
         });
     }
 
