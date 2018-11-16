@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Area;
 
 use App\Area;
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
 class AreaController extends ApiController
@@ -27,12 +28,13 @@ class AreaController extends ApiController
     {
         $rules=[
             'name'=>'required|max:100|unique:areas',
-            'code'=>'required|max:5',
+            'code'=>'required|max:5|unique:areas',
         ];
 
         $this->validate($request,$rules);
 
         $campos=$request->all();
+
         $campos['status']=Area::AREA_HABILITADA;
 
         $area=Area::create($campos);
@@ -51,6 +53,9 @@ class AreaController extends ApiController
 
 
     /**
+     *  isDirty => verifica si la instancia a cambiado
+     * isClean => verifica que la instancia no haya cambiado
+     *
      * @param Request $request
      * @param Area $area
      * @return \Illuminate\Http\JsonResponse
@@ -59,27 +64,20 @@ class AreaController extends ApiController
     {
         $rules=[
             'name'=>'max:100|unique:areas,name,'.$area->id,
-            'code'=>'max:5',
+            'code'=>'max:5|unique:areas,code,'.$area->id,
             'status'=>'in:'. Area::AREA_HABILITADA . ',' . Area::AREA_NO_HABILITADA
         ];
 
         $this->validate($request,$rules);
 
-        if ($request->has('name')){
-            $area->name=$request->name;
-        }
+        $area->fill($request->intersect([
+            'name',
+            'code',
+            'status'
+        ]));
 
-        if ($request->has('code')){
-            $area->code=$request->code;
-        }
-
-        if ($request->has('status')){
-            $area->status=$request->status;
-        }
-
-        if (!$area->isDirty()){
+        if ($area->isClean()){
             return $this->errorResponse('Se debe especificar algun valor para actualizar',422);
-//            return response()->json(['error'=>'Se debe especificar algun valor para actualizar','code'=>422],422);
         }
 
         $area->save();

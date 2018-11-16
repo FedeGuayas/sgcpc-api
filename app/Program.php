@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Area extends Model
+class Program extends Model
 {
     use SoftDeletes;
 
@@ -16,10 +16,9 @@ class Area extends Model
         'code'
     ];
 
-    public function estaHabilitada()
-    {
-        return $this->status == Area::AREA_HABILITADA;
-    }
+    protected $hidden=[
+        'pivot'
+    ];
 
     public function setNameAttribute($value)
     {
@@ -43,13 +42,10 @@ class Area extends Model
 
     }
 
-    /**Relaciones**/
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    /*
+     * Relaciones
      */
-    public function departments()
-    {
-        return $this->hasMany('App\Department');
+    public function activities(){
+        return $this->belongsToMany('App\Activity');
     }
 }

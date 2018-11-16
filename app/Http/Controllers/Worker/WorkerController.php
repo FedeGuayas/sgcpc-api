@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Worker;
 
 use App\Department;
+use App\Http\Controllers\ApiController;
 use App\User;
 use App\Worker;
 use Illuminate\Http\Request;
@@ -37,11 +38,14 @@ class WorkerController extends ApiController
 
         $this->validate($request,$rules);
 
-        $usuario=User::findOrFail($request->user_id);
         $departamento=Department::findOrFail($request->department_id);
 
         $trabajador=new Worker();
-        $trabajador->user()->associate($usuario);
+
+        if ($request->has('user_id')){
+            $usuario=User::findOrFail($request->user_id);
+            $trabajador->user()->associate($usuario);
+        }
         $trabajador->department()->associate($departamento);
         $trabajador->first_name=$request->first_name;
         $trabajador->last_name=$request->last_name;
@@ -88,24 +92,24 @@ class WorkerController extends ApiController
             $worker->user()->associate($usuario);
         }
 
-        if ($request->has('department_id') && $worker->department_id!=$request->department_id){
+        if ($worker->department_id!=$request->department_id){
             $departamento=Department::findOrFail($request->department_id);
             $worker->department()->associate($departamento);
         }
 
-        if ($request->has('first_name') && $worker->first_name!=$request->first_name){
+        if ($worker->first_name!=$request->first_name){
             $worker->first_name=$request->first_name;
         }
 
-        if ($request->has('last_name') && $worker->last_name!=$request->last_name){
+        if ($worker->last_name!=$request->last_name){
             $worker->last_name=$request->last_name;
         }
 
-        if ($request->has('email') && $worker->email!=$request->email){
+        if ($worker->email!=$request->email){
             $worker->email=$request->email;
         }
 
-        if ($request->has('dni') && $worker->dni!=$request->dni){
+        if ($worker->dni!=$request->dni){
             $worker->dni=$request->dni;
         }
 

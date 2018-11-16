@@ -20,7 +20,7 @@ class Worker extends Model
         'dni',
         'passport',
         'position',
-        'treatment'
+        'title'
     ];
 
     public function setFirstNameAttribute($value)
@@ -68,7 +68,11 @@ class Worker extends Model
 
     public function setPassportAttribute($value)
     {
-        $this->attributes['passport']=strtolower($value);
+        if ( empty($value) ){
+            $this->attributes['passport']=NULL;
+        }else {
+            $this->attributes['passport']=strtolower($value);
+        }
     }
 
     public function getPassportAttribute($value)
@@ -90,7 +94,7 @@ class Worker extends Model
 
     public function setTreatmentAttribute($value)
     {
-        $this->attributes['treatment']=strtolower($value);
+        $this->attributes['title']=strtolower($value);
     }
 
     public function getTreatmentAttribute($value)

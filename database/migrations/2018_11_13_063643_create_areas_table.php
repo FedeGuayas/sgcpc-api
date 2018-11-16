@@ -16,8 +16,8 @@ class CreateAreasTable extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',100)->unique();
-            $table->string('code',5);
-            $table->string('status')->default(\App\Area::AREA_HABILITADA);
+            $table->string('code',5)->unique();
+            $table->timestamps();
             $table->softDeletes();
         });
     }

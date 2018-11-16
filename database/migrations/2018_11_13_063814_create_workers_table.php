@@ -21,16 +21,14 @@ class CreateWorkersTable extends Migration
             $table->string('last_name',100);
             $table->string('email')->unique();
             $table->char('dni',10)->nullable()->unique(); //requerido sino esta el pasaporte
-            $table->string('passport')->nullable();
+            $table->string('passport')->nullable()->unique();
             $table->string('position')->nullable();
-            $table->string('treatment')->nullable();
+            $table->string('title')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('department_id')->references('id')->on('departments')
-                ->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('department_id')->references('id')->on('departments');
 
         });
     }

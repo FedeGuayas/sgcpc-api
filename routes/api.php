@@ -20,19 +20,33 @@ use Illuminate\Http\Request;
 /*
  * Areas
  */
-Route::resource('areas','AreaController',['except'=>['create','edit']]);
+Route::resource('areas','Area\AreaController',['except'=>['create','edit']]);
+Route::resource('areas.departments','Area\AreaDepartmentController',['except'=>['create','show','edit']]);
 
 /*
  * Departments
  */
-Route::resource('departments','DepartmentController',['except'=>['create','edit']]);
+Route::resource('departments','Department\DepartmentController',['only'=>['index','show']]);
+Route::resource('departments.workers','Department\DepartmentworkerController',['only'=>['index']]);
 
 /*
  * Workers
  */
-Route::resource('workers','WorkerController',['except'=>['create','edit']]);
+Route::resource('workers','Worker\WorkerController',['except'=>['create','edit']]);
 
 /*
  * Users
  */
-Route::resource('users','UserController',['except'=>['create','edit']]);
+Route::resource('users','User\UserController',['except'=>['create','edit']]);
+Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
+
+/*
+ * Activity
+ */
+Route::resource('activities','Activity\ActivityController',['except'=>['create','edit']]);
+
+/*
+ * Program
+ */
+Route::resource('programs','Program\ProgramController',['except'=>['create','edit']]);
+Route::resource('programs.activities','Program\ProgramActivityController',['only'=>['index','update','destroy']]);

@@ -17,10 +17,11 @@ class CreateDepartmentsTable extends Migration
             $table->increments('id');
             $table->integer('area_id')->unsigned();
             $table->string('name',100);
+            $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('area_id')->references('id')->on('areas')
-                ->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('area_id')->references('id')->on('areas');
+//                ->onUpdate('cascade')->onDelete('restrict');
             $table->unique(['area_id', 'name']);
         });
     }

@@ -20,6 +20,9 @@ class User extends Authenticatable
 
     use Notifiable,SoftDeletes;
 
+    const USUARIO_VERIFICADO='1';
+    const USUARIO_NO_VERIFICADO='0';
+
     protected $dates=['deleted_at'];
 
     /**
@@ -28,7 +31,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'verified',
+        'verification_token'
     ];
 
     /**
@@ -37,7 +44,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'verification_token'
     ];
 
 
@@ -65,6 +74,21 @@ class User extends Authenticatable
 
     }
 
+    /**
+     * true => si es verificado
+     * @return bool
+     */
+    public function esVerificado(){
+        return $this->verified == User::USUARIO_VERIFICADO;
+    }
+
+    /**
+     * Genera el Token de verificacion del usuario
+     * @return string
+     */
+    public static function generarVerificationToken(){
+        return hash_hmac('sha256', str_random(40), config('app.key'));
+    }
 
 
     /*** Relaciones***/
