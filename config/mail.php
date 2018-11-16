@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'admin@fedeguayas.com.ec'),
-        'name' => env('MAIL_FROM_NAME', 'Sistema de Gestión Planificación Cntrol y Adquisiciones'),
+        'name' => env('MAIL_FROM_NAME', 'Sistema de Gestión Planificación Control y Adquisiciones'),
     ],
 
     /*
