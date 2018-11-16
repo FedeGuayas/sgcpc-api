@@ -18,6 +18,14 @@ use Illuminate\Http\Request;
 //});
 
 /*
+ * Users
+ */
+Route::resource('users','User\UserController',['except'=>['create','edit']]);
+Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
+Route::name('resend')->get('users/{user}/resend','User\UserController@resend');
+
+
+/*
  * Areas
  */
 Route::resource('areas','Area\AreaController',['except'=>['create','edit']]);
@@ -34,11 +42,6 @@ Route::resource('departments.workers','Department\DepartmentworkerController',['
  */
 Route::resource('workers','Worker\WorkerController',['except'=>['create','edit']]);
 
-/*
- * Users
- */
-Route::resource('users','User\UserController',['except'=>['create','edit']]);
-Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 
 /*
  * Activity
