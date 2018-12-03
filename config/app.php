@@ -168,6 +168,8 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
+        // Permit cors for api
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
