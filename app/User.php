@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Scopes\UserScope;
+use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,12 @@ class User extends Authenticatable
         'verified',
         'verification_token'
     ];
+
+    /**
+     * Propiedad para realcionar el modelo User con su Transformer
+     * @var string
+     */
+    public $transformer = UserTransformer::class;
 
     /**
      * The attributes that should be hidden for arrays.

@@ -30,10 +30,10 @@ class DatabaseSeeder extends Seeder
         \App\Activity::flushEventListeners();
         \App\Program::flushEventListeners();
 
-        $cantUsuarios=200;
+        $cantUsuarios=5000;
         $cantArea=10;
         $cantDepartamentos=30;
-        $cantWorker=200;
+        $cantWorker=4000;
         $cantActividades=15;
         $cantProgramas=3;
 

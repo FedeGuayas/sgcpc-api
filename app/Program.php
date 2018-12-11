@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\ProgramTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,6 +16,8 @@ class Program extends Model
         'name',
         'code'
     ];
+
+    public $transformer = ProgramTransformer::class;
 
     protected $hidden=[
         'pivot'

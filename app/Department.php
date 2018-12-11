@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\DepartmentTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,6 +16,8 @@ class Department extends Model
         'area_id',
         'name'
     ];
+
+    public $transformer = DepartmentTransformer::class;
 
 
     public function setNameAttribute($value)

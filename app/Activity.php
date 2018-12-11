@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\ActivityTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,8 @@ class Activity extends Model
     protected $hidden=[
         'pivot'
     ];
+
+    public $transformer = ActivityTransformer::class;
 
     public function setNameAttribute($value)
     {

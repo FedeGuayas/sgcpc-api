@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Transformers\WorkerTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -22,6 +23,8 @@ class Worker extends Model
         'position',
         'title'
     ];
+
+    public $transformer = WorkerTransformer::class;
 
     public function setFirstNameAttribute($value)
     {
