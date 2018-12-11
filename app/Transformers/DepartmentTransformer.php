@@ -21,6 +21,14 @@ class DepartmentTransformer extends TransformerAbstract
             'fechaCreacion' => (string)$depa->created_at,
             'fechaActualizacion' => (string)$depa->updated_at,
             'fechaEliminacion' => isset($depa->deleted_at) ? (string)$depa->deleted_at : null,
+            'links' => [ //HEATOATS
+                [ 'rel' => 'self',
+                    'href' => route('departments.show', $depa->id),
+                ],
+                [ 'rel' => 'departments.workers',
+                    'href' => route('departments.workers.index', $depa->id),
+                ],
+            ]
         ];
     }
 
