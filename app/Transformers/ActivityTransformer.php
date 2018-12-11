@@ -21,7 +21,11 @@ class ActivityTransformer extends TransformerAbstract
             'fechaCreacion' => (string)$activity->created_at,
             'fechaActualizacion' => (string)$activity->updated_at,
             'fechaEliminacion' => isset($activity->deleted_at) ? (string)$activity->deleted_at : null,
-
+            'links' => [
+                [ 'rel' => 'self',
+                    'href' => route('activities.show', $activity->id),
+                ]
+            ]
         ];
     }
 
