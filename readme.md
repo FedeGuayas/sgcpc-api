@@ -1,6 +1,6 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-## API Laravel
+## API Laravel DEV
 
 Desarrollo de una API REST con Laravel 5.4
 
