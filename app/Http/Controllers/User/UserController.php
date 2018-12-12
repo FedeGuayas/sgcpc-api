@@ -4,12 +4,25 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\ApiController;
 use App\Mail\UserCreated;
+use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
+    /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // especificar en el middleware a que trasnform se aplicara
+        $this->middleware('transform.input:'. UserTransformer::class)->only(['store','update']);
+    }
+
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -81,13 +94,6 @@ class UserController extends ApiController
         if ($request->has('password')) {
             $user->password = $request->password;
         }
-
-//        if ($request->has('admin')){
-//            if (!$user->esVerificado()){
-//                return response()->json(['error'=>'Unicamente los verificados pueden cambiar su valor de administrador','code'=>409],409);
-//            }
-//            $user->admin=$request->admin;
-//        }
 
         if (!$user->isDirty()) {
             return $this->errorResponse('Se debe especificar algun valor para actualizar', 422);

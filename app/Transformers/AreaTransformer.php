@@ -45,4 +45,18 @@ class AreaTransformer extends TransformerAbstract
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
+
+    public static  function tranformedAttribute($index)
+    {
+        $attributes =[
+            'id' => 'identificador',
+            'name' => 'nombre',
+            'code' => 'codigo',
+            'created_at' => 'fechaCreacion',
+            'updated_at' => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
+
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }

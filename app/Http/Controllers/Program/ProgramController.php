@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Program;
 
 use App\Http\Controllers\ApiController;
 use App\Program;
+use App\Transformers\ProgramTransformer;
 use Illuminate\Http\Request;
 
 class ProgramController extends ApiController
 {
+    /**
+     * ProgramController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'. ProgramTransformer::class)->only(['store','update']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

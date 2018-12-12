@@ -51,4 +51,23 @@ class UserTransformer extends TransformerAbstract
         return isset($attributes[$index]) ? $attributes[$index] : null;
      }
 
+    /** Realiza el trabajo del metodo anteriro pero en sentido inverso, util para las respuestas de validacion
+     * @param $index
+     * @return mixed|null
+     */
+    public static  function tranformedAttribute($index)
+    {
+        $attributes =[
+            'id' => 'identificador',
+            'name' => 'nombre',
+            'email' => 'correo',
+            'verified' => 'esVerificado',
+            'created_at' => 'fechaCreacion',
+            'updated_at' => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
+
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
 }

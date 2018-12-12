@@ -5,11 +5,22 @@ namespace App\Http\Controllers\Area;
 use App\Area;
 use App\Department;
 use App\Http\Controllers\ApiController;
+use App\Transformers\DepartmentTransformer;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AreaDepartmentController extends ApiController
 {
+    /**
+     * AreaDepartmentController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'.DepartmentTransformer::class)->only(['store','update']);
+    }
+
     /**
      * Los departamentos de una area
      *

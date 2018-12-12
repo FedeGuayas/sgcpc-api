@@ -12,13 +12,6 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
 
-    //Este Scope global hace que las consultas de user solo me devuelvan los que son trabajadores
-    protected static function boot(){
-        parent::boot(); //necesario para mantener el correcto funcionamiento del framework
-//        static::addGlobalScope(new UserScope());
-    }
-
-
     use Notifiable,SoftDeletes;
 
     const USUARIO_VERIFICADO='1';

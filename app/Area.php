@@ -19,11 +19,6 @@ class Area extends Model
 
     public $transformer = AreaTransformer::class;
 
-    public function estaHabilitada()
-    {
-        return $this->status == Area::AREA_HABILITADA;
-    }
-
     public function setNameAttribute($value)
     {
         $this->attributes['name']=mb_strtolower($value);

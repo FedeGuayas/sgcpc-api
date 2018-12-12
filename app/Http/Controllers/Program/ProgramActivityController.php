@@ -20,7 +20,7 @@ class ProgramActivityController extends ApiController
     }
 
     /**
-     * sync -> sincroniza el pivot quitando lo anteriro y dejando los id nuevos
+     * sync -> sincroniza el pivot quitando lo anterior y dejando los id nuevos
      * attach -> va agregando los nuevos id al pivot, puede duplicar id existentes
      * syncWithoutDetaching -> sincroniza pero no quita los id anteriores
      * @param Request $request

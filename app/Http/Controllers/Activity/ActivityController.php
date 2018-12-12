@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Activity;
 
 use App\Activity;
 use App\Http\Controllers\ApiController;
+use App\Transformers\ActivityTransformer;
 use Illuminate\Http\Request;
 
 class ActivityController extends ApiController
 {
+    /**
+     * ActivityController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'. ActivityTransformer::class)->only(['store','update']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

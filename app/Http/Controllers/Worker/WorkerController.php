@@ -4,12 +4,23 @@ namespace App\Http\Controllers\Worker;
 
 use App\Department;
 use App\Http\Controllers\ApiController;
+use App\Transformers\WorkerTransformer;
 use App\User;
 use App\Worker;
 use Illuminate\Http\Request;
 
 class WorkerController extends ApiController
 {
+    /**
+     * WorkerController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'. WorkerTransformer::class)->only(['store','update']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

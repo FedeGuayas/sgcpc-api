@@ -41,7 +41,7 @@ class WorkerTransformer extends TransformerAbstract
         $attributes =[
             'identificador' => 'id',
             'usuario' => 'user_id',
-            'departamento' => 'deparment_id',
+            'departamento' => 'department_id',
             'nombres' => 'first_name',
             'apellidos' => 'last_name',
             'correo' => 'email',
@@ -52,6 +52,27 @@ class WorkerTransformer extends TransformerAbstract
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
             'fechaEliminacion' => 'deleted_at',
+
+        ];
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
+    public static  function transformedAttribute($index)
+    {
+        $attributes =[
+            'id' => 'identificador',
+            'user_id' => 'usuario',
+            'department_id' => 'departamento',
+            'first_name' => 'nombres',
+            'last_name' => 'apellidos',
+            'email' => 'correo',
+            'dni' => 'cedula',
+            'passport' => 'pasaporte',
+            'position' => 'cargo',
+            'title' => 'titulo',
+            'created_at' => 'fechaCreacion',
+            'updated_at' => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
 
         ];
         return isset($attributes[$index]) ? $attributes[$index] : null;

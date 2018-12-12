@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Area;
 
 use App\Area;
 use App\Http\Controllers\ApiController;
+use App\Transformers\AreaTransformer;
 use Illuminate\Http\Request;
 
 class AreaController extends ApiController
 {
+    /**
+     * AreaController constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'. AreaTransformer::class)->only(['store','update']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -35,7 +46,7 @@ class AreaController extends ApiController
 
         $campos=$request->all();
 
-        $campos['status']=Area::AREA_HABILITADA;
+//        $campos['status']=Area::AREA_HABILITADA;
 
         $area=Area::create($campos);
 
@@ -65,7 +76,7 @@ class AreaController extends ApiController
         $rules=[
             'name'=>'max:100|unique:areas,name,'.$area->id,
             'code'=>'max:5|unique:areas,code,'.$area->id,
-            'status'=>'in:'. Area::AREA_HABILITADA . ',' . Area::AREA_NO_HABILITADA
+//            'status'=>'in:'. Area::AREA_HABILITADA . ',' . Area::AREA_NO_HABILITADA
         ];
 
         $this->validate($request,$rules);
@@ -73,7 +84,7 @@ class AreaController extends ApiController
         $area->fill($request->intersect([
             'name',
             'code',
-            'status'
+//            'status'
         ]));
 
         if ($area->isClean()){
