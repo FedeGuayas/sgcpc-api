@@ -2,7 +2,7 @@
 
 ## API Laravel
 
-Desarrollo de una API REST con Laravel 5.4
+API REST con Laravel 5.4
 
 
 
