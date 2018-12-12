@@ -4,14 +4,17 @@ namespace App\Exceptions;
 
 use App\Traits\ApiResponser;
 
+
+use Asm89\Stack\CorsService;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
-use function Psy\debug;
+//use function Psy\debug;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -57,6 +60,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // metodo donde se manejan las excepciones
+        $response = $this->handlerException($request, $exception);
+
+        /** Incluir las cabeceras de CORS en las respuestas de validacion de errores **/
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
+
+        return $response;
+
+    }
+
+    /**
+     * Metodo para manejar las respuestas  a las excepciones de la API
+     * @param $request
+     * @param Exception $exception
+     * @return $this|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     */
+    public function handlerException($request, Exception $exception){
+
         /**Para manejar los errores de validacion con respuestas json***/
         if ($exception instanceof ValidationException){
             return $this->convertValidationExceptionToResponse($exception,$request);
@@ -101,7 +122,10 @@ class Handler extends ExceptionHandler
             }
         }
 
-
+        /*** Exception de la proteccion csfr ,  no es necesario para la api ***/
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()->back()->withInput($request->input());
+        }
 
 
         /**Si se esta en desarrollo mostrar la mayor cantidad de informacion posible de los errores,  **/
@@ -111,7 +135,9 @@ class Handler extends ExceptionHandler
         /**Sino mostra mensage general, Excepcion por falla inesperada, error 500***/
         return $this->errorResponse('Falla inesperada. Intente luego',500);
 
+
     }
+
 
     /**MODIFICADO PARA MOSTRAR SOLO RESPUESTAS JSON Y NO REDIRECT
      *

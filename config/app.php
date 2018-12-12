@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        // Transformer
         Spatie\Fractal\FractalServiceProvider::class,
         // Permit cors for api
         Barryvdh\Cors\ServiceProvider::class,

@@ -13,10 +13,10 @@ return [
     */
    
     'supportsCredentials' => false,
-    'allowedOrigins' => ['*'], // ex: ['abc.com', 'api.abc.com']
+    'allowedOrigins' => ['*'], // ex: ['abc.com', 'api.abc.com','sgcpc.fedeguayas.com.ec']
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'], // 'Content-Type', 'X-Requested-With'
-    'allowedMethods' => ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE'], // ex: ['GET', 'POST', 'PUT', 'DELETE'] '*'
+    'allowedMethods' => ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE'], // ex: ['GET', 'POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE'] '*'
     'exposedHeaders' => [],
     'maxAge' => 0,
 
