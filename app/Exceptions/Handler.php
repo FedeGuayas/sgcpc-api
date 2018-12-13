@@ -167,7 +167,7 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
-        //metodo del trait que defini
+        //metodo del trait ApiResponser
         return $this->errorResponse($errors,422);
 
     }

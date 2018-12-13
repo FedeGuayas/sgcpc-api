@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Scopes\UserScope;
+//use App\Scopes\UserScope;
 use App\Transformers\UserTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;

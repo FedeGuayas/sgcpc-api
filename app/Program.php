@@ -45,10 +45,19 @@ class Program extends Model
 
     }
 
-    /*
-     * Relaciones
+    /** Relaciones **/
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function activities(){
         return $this->belongsToMany('App\Activity');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partidas() {
+        return $this->belongsTo('App\Partida');
     }
 }

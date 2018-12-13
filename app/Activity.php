@@ -23,32 +23,35 @@ class Activity extends Model
 
     public $transformer = ActivityTransformer::class;
 
-    public function setNameAttribute($value)
-    {
+    public function setNameAttribute($value) {
         $this->attributes['name']=mb_strtolower($value);
     }
 
-    public function getNameAttribute($value)
-    {
+    public function getNameAttribute($value) {
         return mb_strtoupper($value);
-
     }
 
-    public function setCodeAttribute($value)
-    {
+    public function setCodeAttribute($value) {
         $this->attributes['code']=strtolower($value);
     }
 
-    public function getCodeAttribute($value)
-    {
+    public function getCodeAttribute($value) {
         return strtoupper($value);
-
     }
 
-    /*
-     * Relaciones
+    /** Relaciones **/
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function programs(){
+    public function programs() {
         return $this->belongsToMany('App\Program');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partidas() {
+        return $this->belongsTo('App\Partida');
     }
 }
