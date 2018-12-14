@@ -24,7 +24,6 @@ Route::resource('users','User\UserController',['except'=>['create','edit']]);
 Route::name('verify')->get('users/verify/{token}','User\UserController@verify');
 Route::name('resend')->get('users/{user}/resend','User\UserController@resend');
 
-
 /*
  * Areas
  */
@@ -42,7 +41,6 @@ Route::resource('departments.workers','Department\DepartmentworkerController',['
  */
 Route::resource('workers','Worker\WorkerController',['except'=>['create','edit']]);
 
-
 /*
  * Activity
  */
@@ -53,3 +51,13 @@ Route::resource('activities','Activity\ActivityController',['except'=>['create',
  */
 Route::resource('programs','Program\ProgramController',['except'=>['create','edit']]);
 Route::resource('programs.activities','Program\ProgramActivityController',['only'=>['index','update','destroy']]);
+
+/*
+ *  Item
+ */
+Route::resource('items','Item\ItemController',['except'=>['create','edit']]);
+
+/*
+ *  Partida
+ */
+Route::resource('partidas','Partida\PartidaController',['except'=>['create','edit']]);

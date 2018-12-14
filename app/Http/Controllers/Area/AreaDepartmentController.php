@@ -23,8 +23,8 @@ class AreaDepartmentController extends ApiController
 
     /**
      * Los departamentos de una area
-     *
-     * @return \Illuminate\Http\Response
+     * @param Area $area
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Area $area)
     {

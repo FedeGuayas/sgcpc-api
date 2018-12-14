@@ -43,7 +43,7 @@ class TransformInput
 
             foreach ($data->error as $field => $error){
                 // valor del campo transformado a partir del original
-                $transformedField = $transformer::tranformedAttribute($field);
+                $transformedField = $transformer::transformedAttribute($field);
                 // formar la lista para la resp de errores  con los nombres de los atrib tranformados
                 $transformedErrors[$transformedField] = str_replace($field, $transformedField, $error);
             }

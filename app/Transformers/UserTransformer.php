@@ -55,7 +55,7 @@ class UserTransformer extends TransformerAbstract
      * @param $index
      * @return mixed|null
      */
-    public static  function tranformedAttribute($index)
+    public static  function transformedAttribute($index)
     {
         $attributes =[
             'id' => 'identificador',

@@ -45,7 +45,7 @@ class ActivityTransformer extends TransformerAbstract
     }
 
 
-    public static  function tranformedAttribute($index)
+    public static  function transformedAttribute($index)
     {
         $attributes =[
             'id' => 'identificador',
