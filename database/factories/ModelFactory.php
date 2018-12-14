@@ -14,7 +14,6 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
-
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -59,7 +58,6 @@ $factory->define(App\Worker::class, function (Faker\Generator $faker) {
     $users=\App\User::all()->pluck('id');
 
     return [
-
         'user_id'=>$faker->unique()->randomElement($users),
         'department_id'=>\App\Department::all()->random()->id,
         'first_name'=>$faker->firstName,
@@ -72,3 +70,31 @@ $factory->define(App\Worker::class, function (Faker\Generator $faker) {
     ];
 });
 
+
+$factory->define(App\Item::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->sentence(5),
+        'code' =>$faker->unique()->numerify('######'),
+        'description' => $faker->paragraph(3),
+    ];
+});
+
+$factory->define(\App\Partida::class, function (Faker\Generator $faker) {
+
+    $pro = \App\Program::all()->pluck('id');
+    $act = \App\Activity::all()->pluck('id');
+    $itm = \App\Item::all()->pluck('id');
+
+    return [
+        'program_id' => $prog_id = $faker->randomElement($pro),
+        'activity_id' => $act_id = $faker->randomElement($act),
+        'item_id' => $itm_id = $faker->unique()->randomElement($itm),
+        'programa' => \App\Program::where('id',$prog_id)->first()->code,
+        'actividad' => \App\Activity::where('id',$act_id)->first()->code,
+        'renglon' => \App\Item::where('id',$itm_id)->first()->code,
+        'presupuesto' => $presup = $faker->randomFloat(2, 0, 500000),
+        'disponible' => $presup,
+        'origen'=> $faker->randomElement([\App\Partida::ORIGEN_AUTOGESTION,\App\Partida::ORIGEN_ESTADO])
+    ];
+});
