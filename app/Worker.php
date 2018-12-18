@@ -107,7 +107,7 @@ class Worker extends Model
     }
 
 
-    /**Relaciones**/
+    /** Relaciones **/
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -117,3 +117,5 @@ class Worker extends Model
         return $this->belongsTo('App\Department');
     }
 }
+
+
