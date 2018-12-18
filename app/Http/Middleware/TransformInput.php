@@ -27,7 +27,7 @@ class TransformInput
             $trasformedInput[$transformer::originalAttribute($input)] = $value; //  $trasformedInput['nombre'] = name;
         }
 
-        // rempazar los input de la peticion original, con los trasnformados
+        // remplazar los input de la peticion original, con los transformados
         $request->replace($trasformedInput );
 
         $response = $next($request);
@@ -44,7 +44,7 @@ class TransformInput
             foreach ($data->error as $field => $error){
                 // valor del campo transformado a partir del original
                 $transformedField = $transformer::transformedAttribute($field);
-                // formar la lista para la resp de errores  con los nombres de los atrib tranformados
+                // formar la lista para la resp de errores  con los nombres de los atrib transformados
                 $transformedErrors[$transformedField] = str_replace($field, $transformedField, $error);
             }
 

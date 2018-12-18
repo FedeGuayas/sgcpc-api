@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Partida;
 
 use App\Http\Controllers\ApiController;
 use App\Partida;
+use App\Transformers\PartidaTransformer;
 use Illuminate\Http\Request;
 
 class PartidaController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:'. PartidaTransformer::class)->only(['store','update']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

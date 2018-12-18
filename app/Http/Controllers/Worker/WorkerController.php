@@ -89,22 +89,22 @@ class WorkerController extends ApiController
     {
         $rules=[
             'user_id'=>'nullable|unique:workers,user_id,'.$worker->id,
-            'department_id'=>'required',
-            'first_name'=>'required|max:100',
-            'last_name'=>'required|max:100',
-            'email'=>'required|email|unique:workers,email,'.$worker->id,
-            'dni' => 'required_without:passport|max:10'
+            'first_name'=>'max:100',
+            'last_name'=>'max:100',
+            'email'=>'email|unique:workers,email,'.$worker->id,
+//            'dni' => 'required_without:passport|max:10'
+            'dni' => 'max:10'
         ];
 
         $this->validate($request,$rules);
 
-        if ($request->has('user_id') && $worker->user_id!=$request->user_id){
-            $usuario=User::findOrFail($request->user_id);
+        if ($request->has('user_id') && $worker->user_id != $request->user_id){
+            $usuario = User::findOrFail($request->user_id);
             $worker->user()->associate($usuario);
         }
 
-        if ($worker->department_id!=$request->department_id){
-            $departamento=Department::findOrFail($request->department_id);
+        if ($worker->department_id != $request->department_id){
+            $departamento = Department::findOrFail($request->department_id);
             $worker->department()->associate($departamento);
         }
 
