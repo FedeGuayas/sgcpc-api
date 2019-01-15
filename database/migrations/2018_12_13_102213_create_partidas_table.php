@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Almacena el presupuesto anual por partida presupuestarias prog-act-reglon
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;

@@ -61,3 +61,8 @@ Route::resource('items','Item\ItemController',['except'=>['create','edit']]);
  *  Partida
  */
 Route::resource('partidas','Partida\PartidaController',['except'=>['create','edit']]);
+
+/*
+ * Process Planificacion
+ */
+Route::resource('processes','Process\ProcessController',['except'=>['create','edit']]);

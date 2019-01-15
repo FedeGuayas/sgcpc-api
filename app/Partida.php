@@ -50,7 +50,7 @@ class Partida extends Model
             return 'Estado';
         } else {
             if ($value === Partida::ORIGEN_AUTOGESTION){
-                return 'Autogestion';
+                return 'Autogestión';
             }
         }
     }
