@@ -15,7 +15,8 @@ class Item extends Model
 
     protected $fillable=[
         'name',
-        'code'
+        'code',
+        'description'
     ];
 
 
@@ -26,6 +27,14 @@ class Item extends Model
     }
 
     public function getNameAttribute($value) {
+        return mb_strtoupper($value);
+    }
+
+    public function setDescriptionAttribute($value) {
+        $this->attributes['description']=mb_strtolower($value);
+    }
+
+    public function getDescriptionAttribute($value) {
         return mb_strtoupper($value);
     }
 

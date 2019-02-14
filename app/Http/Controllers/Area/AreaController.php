@@ -46,8 +46,6 @@ class AreaController extends ApiController
 
         $campos=$request->all();
 
-//        $campos['status']=Area::AREA_HABILITADA;
-
         $area=Area::create($campos);
 
         return $this->showOne($area,201);

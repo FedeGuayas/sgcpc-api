@@ -22,7 +22,7 @@ class ActivityTransformer extends TransformerAbstract
             'fechaActualizacion' => (string)$activity->updated_at,
             'fechaEliminacion' => isset($activity->deleted_at) ? (string)$activity->deleted_at : null,
             'links' => [
-                [ 'rel' => 'self',
+                [ 'rel' => 'activities.show',
                     'href' => route('activities.show', $activity->id),
                 ]
             ]

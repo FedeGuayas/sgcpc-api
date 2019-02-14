@@ -22,11 +22,14 @@ class AreaTransformer extends TransformerAbstract
             'fechaActualizacion' => (string)$area->updated_at,
             'fechaEliminacion' => isset($area->deleted_at) ? (string)$area->deleted_at : null,
             'links' => [
-               [ 'rel' => 'self',
+               [ 'rel' => 'areas.show',
                 'href' => route('areas.show', $area->id),
                ],
                 [ 'rel' => 'area.departments',
                     'href' => route('areas.departments.index', $area->id),
+                ],
+                [ 'rel' => 'area.workers',
+                    'href' => route('areas.workers.index', $area->id),
                 ],
             ]
         ];

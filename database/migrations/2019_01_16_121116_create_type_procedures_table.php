@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMonthsTable extends Migration
+class CreateTypeProceduresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateMonthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('months', function (Blueprint $table) {
+        Schema::create('type_procedures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('month');
-            $table->unsignedTinyInteger('cod');// 1,2,...,12
+            $table->string('name',20)->unique();
+            $table->string('status')->default(\App\TypeProcedure::ENABLED);
         });
     }
 
@@ -27,6 +27,6 @@ class CreateMonthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('months');
+        Schema::dropIfExists('type_procedures');
     }
 }

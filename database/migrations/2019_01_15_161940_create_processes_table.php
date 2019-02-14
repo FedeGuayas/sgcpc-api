@@ -21,11 +21,11 @@ class CreateProcessesTable extends Migration
             $table->increments('id');
             $table->integer('partida_id')->unsigned();
             $table->integer('area_id')->unsigned(); // area que se asigno el presupuesto
-            $table->integer('area_comp')->unsigned()->nullable(); // area con que se compartio el presupuesto
+            $table->integer('area_comp')->unsigned()->default(0); // area con que se compartio el presupuesto
             $table->integer('month_id')->unsigned();
             $table->string('compartido')->default(\App\Process::PRESUPUESTO_NO_COMPARTIDO);
-            $table->decimal('plan_inicial',12,2)->unsigned()->nullable()->default(0); // permanece invariable
-            $table->decimal('monto',12,2)->unsigned()->nullable()->default(0);
+            $table->decimal('plan_inicial',12,2)->unsigned()->default(0); // permanece invariable
+            $table->decimal('monto',12,2)->unsigned()->default(0);
             $table->decimal('comprometido',12,2)->unsigned()->default(0);
             $table->decimal('disponible',12,2)->unsigned()->default(0);
             $table->decimal('ejecutado',12,2)->unsigned()->default(0);

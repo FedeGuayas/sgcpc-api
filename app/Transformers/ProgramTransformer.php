@@ -22,8 +22,11 @@ class ProgramTransformer extends TransformerAbstract
             'fechaActualizacion' => (string)$program->updated_at,
             'fechaEliminacion' => isset($program->deleted_at) ? (string)$program->deleted_at : null,
             'links' => [
-                [ 'rel' => 'self',
+                [ 'rel' => 'programs.show',
                     'href' => route('programs.show', $program->id),
+                ],
+                [ 'rel' => 'programs.activities',
+                    'href' => route('programs.activities.index', $program->id),
                 ]
             ]
         ];

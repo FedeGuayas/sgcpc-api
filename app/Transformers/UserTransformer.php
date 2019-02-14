@@ -18,12 +18,13 @@ class UserTransformer extends TransformerAbstract
             'identificador' => (int)$user->id,
             'nombre' => (string)$user->name,
             'correo' => (string)$user->email,
+//            'contrasena' => (string)$user->password,
             'esVerificado' => (int)$user->verified,
             'fechaCreacion' => (string)$user->created_at,
             'fechaActualizacion' => (string)$user->updated_at,
             'fechaEliminacion' => isset($user->deleted_at) ? (string)$user->deleted_at : null,
             'links' => [
-                [ 'rel' => 'self',
+                [ 'rel' => 'users.show',
                     'href' => route('users.show', $user->id),
                 ]
             ]
@@ -42,6 +43,7 @@ class UserTransformer extends TransformerAbstract
             'identificador' => 'id',
             'nombre' => 'name',
             'correo' => 'email',
+//            'contrasena' => 'password',
             'esVerificado' => 'verified',
             'fechaCreacion' => 'created_at',
             'fechaActualizacion' => 'updated_at',
@@ -61,6 +63,7 @@ class UserTransformer extends TransformerAbstract
             'id' => 'identificador',
             'name' => 'nombre',
             'email' => 'correo',
+//            'password' => 'contrasena',
             'verified' => 'esVerificado',
             'created_at' => 'fechaCreacion',
             'updated_at' => 'fechaActualizacion',

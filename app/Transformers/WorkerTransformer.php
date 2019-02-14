@@ -29,7 +29,7 @@ class WorkerTransformer extends TransformerAbstract
             'fechaActualizacion' => (string)$wk->updated_at,
             'fechaEliminacion' => isset($wk->deleted_at) ? (string)$wk->deleted_at : null,
             'links' => [
-                [ 'rel' => 'self',
+                [ 'rel' => 'workers.show',
                     'href' => route('workers.show', $wk->id),
                 ]
             ]

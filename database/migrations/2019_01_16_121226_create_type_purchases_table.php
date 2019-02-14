@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemsTable extends Migration
+class CreateTypePurchasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('type_purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->char('code',6)->unique();
-            $table->text('description');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->string('name',20)->unique();
+            $table->string('status')->default(\App\TypePurchase::ENABLED);
         });
     }
 
@@ -30,6 +27,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('type_purchases');
     }
 }

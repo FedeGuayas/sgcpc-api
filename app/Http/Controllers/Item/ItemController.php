@@ -72,6 +72,7 @@ class ItemController extends ApiController
         $item->fill($request->intersect([
             'name',
             'code',
+            'description'
         ]));
 
         if ($item->isClean()){

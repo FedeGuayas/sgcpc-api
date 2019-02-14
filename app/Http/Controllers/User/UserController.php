@@ -18,7 +18,6 @@ class UserController extends ApiController
     {
         parent::__construct();
 
-        // especificar en el middleware a que trasnform se aplicara
         $this->middleware('transform.input:'. UserTransformer::class)->only(['store','update']);
     }
 
@@ -47,10 +46,11 @@ class UserController extends ApiController
         $this->validate($request, $rules);
 
         $data = $request->all();
+
         $data['password'] = $request->password;
+        dd($data);
         $data['verified'] = User::USUARIO_NO_VERIFICADO;
         $data['verification_token'] = User::generarVerificationToken();
-
         $usuario = User::create($data);
 
         return $this->showOne($usuario, 201);

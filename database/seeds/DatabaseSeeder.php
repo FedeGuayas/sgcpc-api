@@ -11,8 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-
         \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         \App\User::truncate();
@@ -23,6 +21,7 @@ class DatabaseSeeder extends Seeder
         \App\Program::truncate();
         \App\Item::truncate();
         \App\Partida::truncate();
+        \App\Month::truncate();
         \Illuminate\Support\Facades\DB::table('activity_program')->truncate();
 
         \App\User::flushEventListeners(); //deshabilita los eventos del modelo usuario durante el seeder
@@ -42,6 +41,11 @@ class DatabaseSeeder extends Seeder
         $cantProgramas=3;
         $cantItems=150;
         $cantPartidas=40;
+
+        $this->call(MonthsTableSeeder::class);
+        $this->call(TypesProceduresTableSeeder::class);
+        $this->call(TypesPurchasesTableSeeder::class);
+        $this->call(TypesReformsTableSeeder::class);
 
         factory(\App\User::class, $cantUsuarios)->create();
         

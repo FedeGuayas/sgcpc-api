@@ -17,7 +17,7 @@ class PartidaTransformer extends TransformerAbstract
         return [
             'identificador' => (int)$partida->id,
             'programa_id' => (int)$partida->program_id,
-            'actividad_id' => (int)$partida->activity_id,
+            'actividad_id' => (string)$partida->activity_id,
             'item_id' => (int)$partida->item_id,
             'programa_cod' => (string)$partida->programa,
             'actividad_cod' => (string)$partida->actividad,
@@ -30,7 +30,7 @@ class PartidaTransformer extends TransformerAbstract
             'fechaEliminacion' => isset($partida->deleted_at) ? (string)$partida->deleted_at : null,
 
             'links' => [
-                [ 'rel' => 'self',
+                [ 'rel' => 'partidas.show',
                     'href' => route('partidas.show', $partida->id),
                 ]
             ]

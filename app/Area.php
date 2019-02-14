@@ -50,4 +50,13 @@ class Area extends Model
     {
         return $this->hasMany('App\Department');
     }
+
+    /**
+     * Trabajadores de un area
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function workers()
+    {
+        return $this->hasManyThrough('App\Worker', 'App\Department');
+    }
 }

@@ -26,8 +26,8 @@ class CreatePartidasTable extends Migration
             $table->char('programa',3); // code programs = Esigef -> programa
             $table->char('actividad',3); // code activities = Esigef -> actividad
             $table->char('renglon',6); // code items = Esigef -> renglon
-            $table->decimal('presupuesto',12,2)->unsigned()->nullable()->default(0);
-            $table->decimal('disponible',12,2)->unsigned()->nullable()->default(0);
+            $table->decimal('presupuesto',12,2)->unsigned()->default(0);
+            $table->decimal('disponible',12,2)->unsigned()->default(0);
             $table->string('origen');
 
             $table->timestamps();

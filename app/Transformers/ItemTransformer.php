@@ -24,7 +24,7 @@ class ItemTransformer extends TransformerAbstract
             'fechaEliminacion' => isset($item->deleted_at) ? (string)$item->deleted_at : null,
 
             'links' => [
-                [   'rel' => 'self',
+                [   'rel' => 'items.show',
                     'href' => route('items.show', $item->id),
                 ]
             ]

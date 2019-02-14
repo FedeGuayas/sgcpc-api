@@ -43,7 +43,7 @@ trait ApiResponser{
 
         // validar que la coleccion no este vacia
         if ($collection->isEmpty()) {
-            return $this->successResponse($collection,404);
+            return $this->successResponse(['data' => $collection],$code);
         }
 
         // las respuestas deben ser datos de un solo recurso, sin hacer mezclas en la colleccion para que el  tranformer funciona mas simple
@@ -54,7 +54,7 @@ trait ApiResponser{
         $collection = $this->transformData($collection, $transformer);
         $collection = $this->cacheResponse($collection); // chachear la respuesta
 
-        return $this->successResponse(['data'=>$collection],$code);
+        return $this->successResponse($collection,$code);
     }
 
     /**
@@ -68,7 +68,7 @@ trait ApiResponser{
         $transformer = $instance->transformer;
         $instance = $this->transformData($instance, $transformer);
 
-        return $this->successResponse(['data'=>$instance],$code);
+        return $this->successResponse($instance,$code);
     }
 
     /**
@@ -158,7 +158,9 @@ trait ApiResponser{
 
 
     /**
-     *  Metodo para utilizar los transformers en las respuestas
+     *  Metodo para utilizar los transformers en las respuestas.
+     *
+     *
      * @param $data
      * @param $transformer
      * @return array
