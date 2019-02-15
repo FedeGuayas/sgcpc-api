@@ -141,6 +141,7 @@ class Handler extends ExceptionHandler
 
     /**MODIFICADO PARA MOSTRAR SOLO RESPUESTAS JSON Y NO REDIRECT
      *
+     *
      * Convert an authentication exception into an unauthenticated response.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -149,7 +150,10 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-
+        // Si la peticion viene del frontend si se redirecciona, al login
+        if ($this->isFrontend($request)){
+            return redirect()->guest('login');
+        }
             return $this->errorResponse('No autenticado.', 401);
 
 
@@ -167,8 +171,28 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
+
+        // si la peticion es del frontend
+        if ($this->isFrontend($request)){
+            // si la peticion es ajax, respuesta json, sino se redirecciona
+            return $request->ajax() ? response()->json($errors,422): redirect()
+                ->back()
+                ->withInput($request->input())
+                ->withErrors($errors);
+        }
+
+        //Respuesta de exceptiones de validacion solo para la api
         //metodo del trait ApiResponser
         return $this->errorResponse($errors,422);
 
+    }
+
+    /**
+     * Para las rutas de la version web de este proyecto si existiera. Y que aceptan html
+     * @param $request
+     * @return bool
+     */
+    private function isFrontend($request){
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
     }
 }
