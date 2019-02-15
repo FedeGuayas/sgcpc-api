@@ -2,7 +2,6 @@
 
 /**
  * Middleware para transformar  los input de los request para que conincidan con los Transformers
- * util para las repuestas de validacion en las peticiones post, put, patch
  */
 
 namespace App\Http\Middleware;
