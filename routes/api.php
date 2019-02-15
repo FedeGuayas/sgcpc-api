@@ -88,3 +88,9 @@ Route::resource('partidas','Partida\PartidaController',['except'=>['create','edi
  * Process Planificacion
  */
 Route::resource('processes','Process\ProcessController',['except'=>['create','edit']]);
+
+
+/*
+ * Ruta de Passport
+ */
+Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');

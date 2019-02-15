@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
 
-    use Notifiable,SoftDeletes;
+    use Notifiable,HasApiTokens,SoftDeletes;
 
     const USUARIO_VERIFICADO='1';
     const USUARIO_NO_VERIFICADO='0';
