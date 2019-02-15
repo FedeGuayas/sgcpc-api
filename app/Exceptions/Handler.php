@@ -122,7 +122,7 @@ class Handler extends ExceptionHandler
             }
         }
 
-        /*** Exception de la proteccion csfr ,  no es necesario para la api ***/
+        /*** Exception de la proteccion csfr ,  no es necesario para la api. Solo pa las peticiones del frontend del proyecto ***/
         if ($exception instanceof TokenMismatchException) {
             return redirect()->back()->withInput($request->input());
         }
@@ -149,6 +149,10 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        // en caso dque la peticion si sea html de frontend redireccionar al login sino esta autenticado
+        if ($this->isFrontend($request)){
+            return redirect()->guest('login');
+        }
 
             return $this->errorResponse('No autenticado.', 401);
 
@@ -167,8 +171,22 @@ class Handler extends ExceptionHandler
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
         $errors = $e->validator->errors()->getMessages();
+
+        // respuesta en caso que sea desde la version web
+        if ($this->isFrontend($request)){
+            return $request->ajax() ? response()->json($errors,422) : redirect()
+                ->back()
+                ->withInput($request->input())
+                ->withErrors($errors);
+        }
+
         //metodo del trait ApiResponser
         return $this->errorResponse($errors,422);
 
     }
+
+    // Determinar si una peticion es de nuestro frontend. Lo es si acepta html y si al menos uno de los middleware de la peticion es el web
+    private function isFrontend($request){
+        return $request->acceptsHtml() && collect($request->route()->middleware())->contains('web');
+     }
 }
