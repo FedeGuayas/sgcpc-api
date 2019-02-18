@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ProgramActivityController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * Actividades de un programa
      */

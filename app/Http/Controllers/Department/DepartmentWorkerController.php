@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class DepartmentWorkerController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * los trabajadores de un departamento
      *

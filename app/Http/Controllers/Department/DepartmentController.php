@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index','show']);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

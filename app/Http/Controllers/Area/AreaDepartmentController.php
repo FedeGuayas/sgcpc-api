@@ -16,8 +16,7 @@ class AreaDepartmentController extends ApiController
      */
     public function __construct()
     {
-        parent::__construct();
-
+        $this->middleware('client.credentials')->only(['index']);
         $this->middleware('transform.input:'.DepartmentTransformer::class)->only(['store','update']);
     }
 

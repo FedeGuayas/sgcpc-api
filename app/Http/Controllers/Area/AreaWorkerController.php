@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class AreaWorkerController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * los trabajadores de un area
      *
