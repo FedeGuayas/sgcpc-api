@@ -44,6 +44,9 @@ class TransformInput
             foreach ($data->error as $field => $error){
                 // valor del campo transformado a partir del original
                 $transformedField = $transformer::transformedAttribute($field);
+                //para campos compuestas con _
+                $transformedField = str_replace('_', ' ', snake_case($transformedField));
+                $field = str_replace('_', ' ', snake_case($field));
                 // formar la lista para la resp de errores  con los nombres de los atrib transformados
                 $transformedErrors[$transformedField] = str_replace($field, $transformedField, $error);
             }
