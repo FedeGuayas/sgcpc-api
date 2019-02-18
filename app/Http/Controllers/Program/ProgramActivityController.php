@@ -11,7 +11,7 @@ class ProgramActivityController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('client.credentials')->only(['index']);
+        parent::__construct();
     }
 
     /**

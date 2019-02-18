@@ -11,7 +11,8 @@ class ItemController extends ApiController
 {
     public function __construct()
     {
-        $this->middleware('client.credentials')->only(['index','show']);
+        parent::__construct();
+
         $this->middleware('transform.input:'. ItemTransformer::class)->only(['store','update']);
     }
 

@@ -18,6 +18,7 @@ class UserController extends ApiController
     {
         // un cliente valido del sistema puede registrar un usuario y reenviar el correo de verificacion
         $this->middleware('client.credentials')->only(['store','resend']);
+        $this->middleware('auth:api')->except(['store','verify','resend']);
         $this->middleware('transform.input:'. UserTransformer::class)->only(['store','update']);
     }
 

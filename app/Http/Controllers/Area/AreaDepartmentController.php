@@ -17,6 +17,7 @@ class AreaDepartmentController extends ApiController
     public function __construct()
     {
         $this->middleware('client.credentials')->only(['index']);
+        $this->middleware('auth:api')->except(['index']);
         $this->middleware('transform.input:'.DepartmentTransformer::class)->only(['store','update']);
     }
 

@@ -17,6 +17,7 @@ class WorkerController extends ApiController
     public function __construct()
     {
         $this->middleware('client.credentials')->only(['index','show']);
+        $this->middleware('auth:api')->except(['index','show']);
         $this->middleware('transform.input:'. WorkerTransformer::class)->only(['store','update']);
     }
 
